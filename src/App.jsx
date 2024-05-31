@@ -1,17 +1,23 @@
-import Products from "./components/Products/Products";
-import Button from "./components/UI/Button";
+import { useState } from "react";
 
 function App() {
+  const [state, setState] = useState("Mehmet Doğan");
+  
+  let fullName = "Mehmet Doğan";
+
+  function handleClick() {
+    fullName = "Emin Başbayan";
+    setState("Emin Başbayan")
+    console.log(fullName);
+  }
+
+  console.log("re-rendered!");
+
   return (
     <div className="app">
       <h1>App</h1>
-      <Button size="xl" color="primary">
-        Add To Cart
-      </Button>
-      <Button size="xl" color="danger">
-        <strong>Delete</strong>
-      </Button>
-      <Products />
+      <p>{state}</p>
+      <button onClick={handleClick}>İsmi Değiştir!</button>
     </div>
   );
 }
