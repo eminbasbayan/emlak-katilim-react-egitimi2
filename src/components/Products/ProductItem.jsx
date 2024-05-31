@@ -1,11 +1,7 @@
+import PropTypes from "prop-types";
 import "./ProductItem.css";
 
 function ProductItem(props) {
-  console.log(props.adSoyad);
-  console.log(props.image);
-  console.log(props.title);
-  console.log(props.price);
-
   return (
     <div className="product-item">
       <div className="product-image">
@@ -18,5 +14,11 @@ function ProductItem(props) {
     </div>
   );
 }
+
+ProductItem.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  price: PropTypes.number,
+};
 
 export default ProductItem;
