@@ -1,5 +1,12 @@
+import ProductItem from "./ProductItem";
+
 function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <div className="app">
+        <h1>App</h1>
+        <ProductItem></ProductItem>
+    </div>
+  );
 }
 
 export default App;
