@@ -37,6 +37,7 @@ function Modal(props) {
           </div>
         </div>
       </div>
+      <div className="modal-overlay" onClick={handleClose}></div>
     </div>
   );
 }
