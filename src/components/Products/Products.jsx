@@ -4,10 +4,12 @@ import AddNewProduct from "./AddNewProduct";
 import Modal from "../UI/Modal";
 import "./Products.css";
 import Button from "../UI/Button";
+import Spinner from "../UI/Spinner";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleDeleteItem(productId) {
     const filteredProducts = products.filter((item) => item.id !== productId);
@@ -15,6 +17,8 @@ function Products() {
   }
 
   async function fetchProducts() {
+    setIsLoading(true);
+    setProducts([]);
     try {
       const res = await fetch("https://fakestoreapi.com/products");
       const data = await res.json();
@@ -24,6 +28,8 @@ function Products() {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -39,6 +45,15 @@ function Products() {
 
       <br />
       <br />
+
+      {isLoading && (
+        <>
+          <Spinner />
+          <br />
+          <br />
+        </>
+      )}
+
       {isShowModal && (
         <Modal
           title="Uyarı: Form Hatası"
