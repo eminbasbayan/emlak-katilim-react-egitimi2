@@ -19,10 +19,13 @@ function AddNewProduct() {
     });
   }
 
-  console.log(formData);
+  function handleSubmit(event){
+    event.preventDefault();
+    console.log(formData);
+  }
 
   return (
-    <form className="product-form">
+    <form className="product-form" onSubmit={handleSubmit}>
       {productInputs.map((input, index) => (
         <ProductInput key={index} {...input} handleChange={handleChange} />
       ))}
