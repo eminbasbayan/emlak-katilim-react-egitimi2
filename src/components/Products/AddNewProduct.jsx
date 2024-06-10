@@ -13,7 +13,7 @@ const initialState = {
 };
 
 function AddNewProduct(props) {
-  const { setProducts } = props;
+  const { setProducts, setIsShowModal } = props;
   const [formData, setFormData] = useState(initialState);
 
   function handleChange({ target: { name, value } }) {
@@ -25,13 +25,13 @@ function AddNewProduct(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
+ 
     const isFormValid = Object.values(formData).every(
       (value) => value.trim() !== ""
     );
 
     if (!isFormValid) {
-      console.error("Inputlar boş geçilemez");
+      setIsShowModal(true);
       return;
     }
 
@@ -66,6 +66,7 @@ function AddNewProduct(props) {
 
 AddNewProduct.propTypes = {
   setProducts: PropTypes.func,
+  setIsShowModal: PropTypes.func,
 };
 
 export default AddNewProduct;
