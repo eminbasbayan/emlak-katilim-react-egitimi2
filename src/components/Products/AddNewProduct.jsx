@@ -4,6 +4,7 @@ import Button from "../UI/Button";
 import productInputs from "./productInputs";
 import "./AddNewProduct.css";
 import ProductInput from "./ProductInput";
+import { toast } from "react-toastify";
 
 const initialState = {
   title: "",
@@ -25,13 +26,17 @@ function AddNewProduct(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
- 
+
     const isFormValid = Object.values(formData).every(
       (value) => value.trim() !== ""
     );
 
     if (!isFormValid) {
-      setIsShowModal(true);
+      // setIsShowModal(true);
+      toast.warning("Lütfen tüm inputları doldurunuz!", {
+        autoClose: 1500,
+        delay: 2000,
+      });
       return;
     }
 
