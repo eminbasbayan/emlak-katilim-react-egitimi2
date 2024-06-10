@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import AddNewProduct from "./AddNewProduct";
 import Modal from "../UI/Modal";
@@ -32,6 +32,18 @@ function Products() {
       setIsLoading(false);
     }
   }
+
+  // fetchProducts();
+
+  // useEffect(()=>{
+  // //! component ilk yüklendiğinde bir kere çalışsın.
+  //   fetchProducts();
+  // }, []);
+
+  useEffect(()=>{
+    //! component ilk yüklendiğinde bir kere çalışır ve dependecy array'e verilen değerler güncellendiğinde bir daha çalışır.
+    fetchProducts();
+  }, [isShowModal]);
 
   return (
     <div className="products-wrapper">

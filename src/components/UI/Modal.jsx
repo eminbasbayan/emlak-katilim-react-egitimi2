@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 
@@ -6,6 +7,15 @@ function Modal(props) {
   function handleClose() {
     setIsShowModal(false);
   }
+
+  useEffect(() => {
+    WebSocket.OPEN()
+    //! Clean-up Function: Component DOM'dan kaldırıldığında çalışır.
+    return () => {
+      console.log("Component DOM'dan kaldırıldığında çalışır.");
+      WebSocket.CLOSED()
+    };
+  }, []);
 
   return createPortal(
     <div className="modal d-block">
