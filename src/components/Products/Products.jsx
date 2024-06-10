@@ -1,41 +1,25 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProductItem from "./ProductItem";
 import AddNewProduct from "./AddNewProduct";
 import Modal from "../UI/Modal";
 import "./Products.css";
-import Button from "../UI/Button";
 import Spinner from "../UI/Spinner";
+import useFetchData from "../../hooks/FetchData";
 
 function Products() {
-  const [products, setProducts] = useState([]);
+  const {
+    data: products,
+    setData: setProducts,
+    isLoading,
+    error,
+  } = useFetchData("https://fakestoreapi.com/products/");
+  
   const [isShowModal, setIsShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   function handleDeleteItem(productId) {
     const filteredProducts = products.filter((item) => item.id !== productId);
     setProducts(filteredProducts);
   }
-
-  async function fetchProducts() {
-    setIsLoading(true);
-    setProducts([]);
-    try {
-      const res = await fetch("https://fakestoreapi.com/products");
-      const data = await res.json();
-
-      if (res.ok) {
-        setProducts(data);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <div className="products-wrapper">
@@ -43,12 +27,6 @@ function Products() {
         setProducts={setProducts}
         setIsShowModal={setIsShowModal}
       />
-      <Button onClick={fetchProducts} size="sm" color="primary">
-        Fetch Data
-      </Button>
-
-      <br />
-      <br />
 
       {isLoading && (
         <>
@@ -66,7 +44,7 @@ function Products() {
           danger
         />
       )}
-
+      {error && <span>Data alınırken bir hata oluştu!</span>}
       <div className="products">
         {products.map((item) => {
           return (
