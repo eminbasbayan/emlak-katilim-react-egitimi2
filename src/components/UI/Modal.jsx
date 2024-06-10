@@ -1,19 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 
 function Modal(props) {
+  const [count, setCount] = useState(0);
   const { danger, title, description, setIsShowModal } = props;
   function handleClose() {
     setIsShowModal(false);
   }
 
   useEffect(() => {
-    WebSocket.OPEN()
+    console.log("Modal DOM'a yüklendi!");
+    let i = 0;
+    const intervalId = setInterval(() => {
+      i += 1;
+      setCount(i);
+      console.log(i);
+    }, 1000);
+
     //! Clean-up Function: Component DOM'dan kaldırıldığında çalışır.
     return () => {
       console.log("Component DOM'dan kaldırıldığında çalışır.");
-      WebSocket.CLOSED()
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -25,6 +33,7 @@ function Modal(props) {
             <h5 className={`modal-title ${danger && "text-danger"}`}>
               {title}
             </h5>
+            <h5 className={`modal-title`}>{count}</h5>
             <button
               type="button"
               className="btn-close"
