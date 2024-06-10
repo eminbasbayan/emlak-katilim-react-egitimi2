@@ -13,7 +13,7 @@ function Button(props) {
 
 Button.propTypes = {
   size: PropTypes.oneOf(["xl", "lg", "sm"]).isRequired,
-  color: PropTypes.oneOf(["primary", "danger", "success"]),
+  color: PropTypes.oneOf(["primary", "danger", "success"]).isRequired,
   children: PropTypes.node,
   onClick: PropTypes.func,
 };
