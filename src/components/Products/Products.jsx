@@ -33,22 +33,9 @@ function Products() {
     }
   }
 
-  // fetchProducts();
-
-  useEffect(()=>{
-  //! component ilk yüklendiğinde bir kere çalışsın.
+  useEffect(() => {
     fetchProducts();
   }, []);
-
-  // useEffect(() => {
-  //   //! component ilk yüklendiğinde bir kere çalışır ve dependecy array'e verilen değerler güncellendiğinde bir daha çalışır.
-  //   fetchProducts();
-  // }, [isShowModal]);
-
-  // useEffect(() => {
-  //   //! component her render olduğunda çalışır.
-  //   console.log("run");
-  // });
 
   return (
     <div className="products-wrapper">
