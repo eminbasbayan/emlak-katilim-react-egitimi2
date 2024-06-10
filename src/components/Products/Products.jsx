@@ -7,6 +7,11 @@ import { useState } from "react";
 function Products() {
   const [products, setProducts] = useState(productsData);
 
+  function handleDeleteItem(productId) {
+    const filteredProducts = products.filter((item) => item.id !== productId);
+    setProducts(filteredProducts)
+  }
+
   return (
     <div className="products-wrapper">
       <AddNewProduct setProducts={setProducts} />
@@ -15,10 +20,8 @@ function Products() {
           return (
             <ProductItem
               key={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              description={item.description}
+              {...item}
+              handleDeleteItem={handleDeleteItem}
             />
           );
         })}

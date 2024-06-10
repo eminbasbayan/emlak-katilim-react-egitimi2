@@ -1,31 +1,20 @@
 import Button from "../UI/Button";
 import PropTypes from "prop-types";
 import "./ProductItem.css";
-import { useState } from "react";
-
-/* 
-* 1- component'e bağlı state güncellenirse component yeniden render olur.
-* 2- component'e bağlı props güncellenirse component yeniden render olur.
-*/
-
 function ProductItem(props) {
-  const [titleState, setTitleState] = useState(props.title);
-
-  function handleTitleChanged() {
-    setTitleState("New Title");
-  }
-
+  const { id, image, title, price, description, handleDeleteItem } = props;
+  
   return (
     <div className="product-item">
       <div className="product-image">
-        <img src={props.image} alt={props.title} />
+        <img src={image} alt={title} />
       </div>
       <div className="product-info">
-        <strong>{titleState}</strong>
-        <span>{props.price}₺</span>
-        <span>{props.description}</span>
-        <Button size="sm" color="primary" onClick={handleTitleChanged}>
-          <strong>Change Title</strong>
+        <strong>{title}</strong>
+        <span>{price}₺</span>
+        <span>{description}</span>
+        <Button size="sm" color="danger" onClick={() => handleDeleteItem(id)}>
+          Delete Item
         </Button>
       </div>
     </div>
@@ -33,11 +22,12 @@ function ProductItem(props) {
 }
 
 ProductItem.propTypes = {
+  id: PropTypes.number,
   image: PropTypes.string,
   title: PropTypes.string,
   price: PropTypes.number,
   description: PropTypes.string,
-  setTitleState: PropTypes.func,
+  handleDeleteItem: PropTypes.func,
 };
 
 export default ProductItem;
