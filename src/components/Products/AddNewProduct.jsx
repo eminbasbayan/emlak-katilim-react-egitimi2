@@ -9,7 +9,7 @@ const initialState = {
   title: "",
   image: "",
   description: "",
-  price: "0",
+  price: "",
 };
 
 function AddNewProduct(props) {
@@ -25,6 +25,19 @@ function AddNewProduct(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const { title, image, description, price } = formData;
+
+    if (
+      !title.trim().length ||
+      !image.trim().length ||
+      !price.trim().length ||
+      !description.trim().length
+    ) {
+      console.error("Inputlar boş geçilemez");
+      return;
+    }
+
     const newProduct = {
       ...formData,
       id: Math.random(),
