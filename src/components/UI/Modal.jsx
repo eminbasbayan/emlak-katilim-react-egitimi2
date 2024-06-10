@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
 
 function Modal(props) {
@@ -6,7 +7,7 @@ function Modal(props) {
     setIsShowModal(false);
   }
 
-  return (
+  return createPortal(
     <div className="modal d-block">
       <div className="modal-dialog">
         <div className="modal-content">
@@ -38,7 +39,8 @@ function Modal(props) {
         </div>
       </div>
       <div className="modal-overlay" onClick={handleClose}></div>
-    </div>
+    </div>,
+    document.getElementById("modal-root")
   );
 }
 

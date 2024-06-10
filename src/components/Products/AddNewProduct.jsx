@@ -2,9 +2,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../UI/Button";
 import productInputs from "./productInputs";
-import "./AddNewProduct.css";
 import ProductInput from "./ProductInput";
-import { toast } from "react-toastify";
+import "./AddNewProduct.css";
 
 const initialState = {
   title: "",
@@ -32,11 +31,7 @@ function AddNewProduct(props) {
     );
 
     if (!isFormValid) {
-      // setIsShowModal(true);
-      toast.warning("Lütfen tüm inputları doldurunuz!", {
-        autoClose: 1500,
-        delay: 2000,
-      });
+      setIsShowModal(true);
       return;
     }
 
