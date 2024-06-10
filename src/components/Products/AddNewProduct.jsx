@@ -1,10 +1,12 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import Button from "../UI/Button";
 import productInputs from "./productInputs";
 import "./AddNewProduct.css";
 import ProductInput from "./ProductInput";
 
-function AddNewProduct() {
+function AddNewProduct(props) {
+  const { setProducts } = props;
   const [formData, setFormData] = useState({
     title: "",
     image: "",
@@ -18,10 +20,16 @@ function AddNewProduct() {
       [name]: value,
     });
   }
-
-  function handleSubmit(event){
+  console.log(formData);
+  function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    const newProduct = {
+      ...formData,
+      id: Math.random(),
+      price: Number(formData.price),
+    };
+
+    setProducts((products) => [newProduct, ...products]);
   }
 
   return (
@@ -35,5 +43,9 @@ function AddNewProduct() {
     </form>
   );
 }
+
+AddNewProduct.propTypes = {
+  setProducts: PropTypes.func,
+};
 
 export default AddNewProduct;
