@@ -9,12 +9,14 @@ function ProductInput(props) {
         onChange={props.handleChange}
         placeholder={props.placeholder}
         name={props.name}
+        value={props.value}
       />
     </div>
   );
 }
 
 ProductInput.propTypes = {
+  value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
