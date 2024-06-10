@@ -3,33 +3,21 @@ import Button from "../UI/Button";
 import "./AddNewProduct.css";
 
 function AddNewProduct() {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-
-  console.log({
-    title,
-    image,
-    description,
-    price,
+  const [formData, setFormData] = useState({
+    title: "",
+    image: "",
+    description: "",
+    price: 0,
   });
 
-  function handleTitleChange(event) {
-    setTitle(event.target.value);
+  function handleChange({ target: { name, value } }) {
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   }
 
-  function handleImageChange(event) {
-    setImage(event.target.value);
-  }
-
-  function handleDescChange(event) {
-    setDescription(event.target.value);
-  }
-
-  function handlePriceChange(event) {
-    setPrice(event.target.value);
-  }
+  console.log(formData);
 
   return (
     <form className="product-form">
@@ -37,32 +25,36 @@ function AddNewProduct() {
         <label>Title</label>
         <input
           type="text"
-          onChange={handleTitleChange}
+          onChange={handleChange}
           placeholder="Ürün ismi giriniz."
+          name="title"
         />
       </div>
       <div className="product-input">
         <label>Image</label>
         <input
           type="text"
-          onChange={handleImageChange}
+          onChange={handleChange}
           placeholder="Ürün görseli giriniz."
+          name="image"
         />
       </div>
       <div className="product-input">
         <label>Description</label>
         <input
           type="text"
-          onChange={handleDescChange}
+          onChange={handleChange}
           placeholder="Ürün açıklaması giriniz."
+          name="description"
         />
       </div>
       <div className="product-input">
         <label>Price</label>
         <input
           type="number"
-          onChange={handlePriceChange}
+          onChange={handleChange}
           placeholder="Ürün fiyatı giriniz."
+          name="price"
         />
       </div>
       <Button size="sm" color="primary">
