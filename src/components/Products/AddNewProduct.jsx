@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Button from "../UI/Button";
+import productInputs from "./productInputs";
 import "./AddNewProduct.css";
+import ProductInput from "./ProductInput";
 
 function AddNewProduct() {
   const [formData, setFormData] = useState({
@@ -21,42 +23,9 @@ function AddNewProduct() {
 
   return (
     <form className="product-form">
-      <div className="product-input">
-        <label>Title</label>
-        <input
-          type="text"
-          onChange={handleChange}
-          placeholder="Ürün ismi giriniz."
-          name="title"
-        />
-      </div>
-      <div className="product-input">
-        <label>Image</label>
-        <input
-          type="text"
-          onChange={handleChange}
-          placeholder="Ürün görseli giriniz."
-          name="image"
-        />
-      </div>
-      <div className="product-input">
-        <label>Description</label>
-        <input
-          type="text"
-          onChange={handleChange}
-          placeholder="Ürün açıklaması giriniz."
-          name="description"
-        />
-      </div>
-      <div className="product-input">
-        <label>Price</label>
-        <input
-          type="number"
-          onChange={handleChange}
-          placeholder="Ürün fiyatı giriniz."
-          name="price"
-        />
-      </div>
+      {productInputs.map((input, index) => (
+        <ProductInput key={index} {...input} handleChange={handleChange} />
+      ))}
       <Button size="sm" color="primary">
         Yeni Ürün Ekle
       </Button>
