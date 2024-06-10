@@ -26,14 +26,11 @@ function AddNewProduct(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const { title, image, description, price } = formData;
+    const isFormValid = Object.values(formData).every(
+      (value) => value.trim() !== ""
+    );
 
-    if (
-      !title.trim().length ||
-      !image.trim().length ||
-      !price.trim().length ||
-      !description.trim().length
-    ) {
+    if (!isFormValid) {
       console.error("Inputlar boş geçilemez");
       return;
     }
