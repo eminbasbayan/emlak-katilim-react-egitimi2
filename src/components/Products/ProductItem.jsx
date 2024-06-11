@@ -1,10 +1,10 @@
-import Button from "../UI/Button";
-import PropTypes from "prop-types";
-import "./ProductItem.css";
 import { useContext } from "react";
+import PropTypes from "prop-types";
+import Button from "../UI/Button";
 import { CartContext } from "../../context/CartContext";
+import "./ProductItem.css";
 function ProductItem(props) {
-  const { handleDeleteItem, ...product } = props;
+  const { handleDeleteItem, cart, ...product } = props;
   const { addToCart } = useContext(CartContext);
 
   return (
@@ -13,22 +13,26 @@ function ProductItem(props) {
         <img src={product.image} alt={product.title} />
       </div>
       <div className="product-info">
-        <strong>{product.title}</strong>
-        <span>{product.price}₺</span>
+        <strong>
+          {product.title}{" "}
+        </strong>
+        <span>{product.price}₺  {cart && `x ${product.quantity}`}</span>
         <span>{product.description}</span>
-        <Button
-          size="sm"
-          color="primary"
-          onClick={() => addToCart({ ...product, quantity: 1 })}
-        >
-          Add To Cart
-        </Button>
+        {!cart && (
+          <Button
+            size="sm"
+            color="primary"
+            onClick={() => addToCart({ ...product, quantity: 1 })}
+          >
+            Add To Cart
+          </Button>
+        )}
         <Button
           size="sm"
           color="danger"
-          onClick={() => handleDeleteItem(product.id)}
+          onClick={() => (cart ? {} : handleDeleteItem(product.id))}
         >
-          Delete Item
+          {cart ? "Delete From Cart" : "Delete Item"}
         </Button>
       </div>
     </div>
@@ -42,6 +46,7 @@ ProductItem.propTypes = {
   price: PropTypes.number,
   description: PropTypes.string,
   handleDeleteItem: PropTypes.func,
+  cart: PropTypes.bool,
 };
 
 export default ProductItem;
