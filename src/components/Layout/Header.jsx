@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Header = () => {
   const value = useContext(CartContext);
+  const { themeModeHandler, themeMode } = useContext(ThemeContext);
   return (
     <header className="position-sticky top-0">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,6 +46,18 @@ const Header = () => {
                     <span className="visually-hidden">unread messages</span>
                   </span>
                 </a>
+              </li>
+              <li className="nav-item">
+                <button
+                  className="nav-link position-relative"
+                  onClick={themeModeHandler}
+                >
+                  {themeMode === "light" ? (
+                    <i className="bi bi-toggle-off"></i>
+                  ) : (
+                    <i className="bi bi-toggle-on"></i>
+                  )}
+                </button>
               </li>
             </ul>
           </div>
