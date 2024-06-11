@@ -27,8 +27,6 @@ const CartProvider = (props) => {
     setCartItems((prevState) => [product, ...prevState]);
   };
 
-  console.log(cartItems);
-
   return (
     <CartContext.Provider
       value={{
