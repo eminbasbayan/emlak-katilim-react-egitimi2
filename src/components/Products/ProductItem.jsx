@@ -1,23 +1,29 @@
 import { useContext } from "react";
 import PropTypes from "prop-types";
-import Button from "../UI/Button";
+import { useNavigate } from "react-router-dom";
+
 import { CartContext } from "../../context/CartContext";
+import Button from "../UI/Button";
+
 import "./ProductItem.css";
 function ProductItem(props) {
   const { handleDeleteItem, cart, ...product } = props;
+  const { id, image, title, price, quantity, description } = product;
   const { addToCart, deleteFromCart } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
   return (
     <div className="product-item">
       <div className="product-image">
-        <img src={product.image} alt={product.title} />
+        <img src={image} alt={title} />
       </div>
       <div className="product-info">
-        <strong>{product.title} </strong>
+        <strong onClick={() => navigate(`/products/${id}`)}>{title} </strong>
         <span>
-          {product.price}₺ {cart && `x ${product.quantity}`}
+          {price}₺ {cart && `x ${quantity}`}
         </span>
-        <span>{product.description}</span>
+        <span>{description}</span>
         {!cart && (
           <Button
             size="sm"
@@ -30,9 +36,7 @@ function ProductItem(props) {
         <Button
           size="sm"
           color="danger"
-          onClick={() =>
-            cart ? deleteFromCart(product.id) : handleDeleteItem(product.id)
-          }
+          onClick={() => (cart ? deleteFromCart(id) : handleDeleteItem(id))}
         >
           {cart ? "Delete From Cart" : "Delete Item"}
         </Button>

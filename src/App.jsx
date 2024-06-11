@@ -13,6 +13,7 @@ import CartPage from "./pages/CartPage";
 
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./pages/404Page";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   const { themeMode } = useContext(ThemeContext);
@@ -41,6 +42,10 @@ function App() {
         {
           path: "/cart",
           element: <CartPage />,
+        },
+        {
+          path: "/products/:productId",
+          element: <ProductDetailsPage />,
         },
         {
           path: "*",
