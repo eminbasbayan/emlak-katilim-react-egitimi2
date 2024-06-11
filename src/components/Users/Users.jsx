@@ -1,25 +1,22 @@
-import Spinner from "./UI/Spinner";
-import useFetchData from "../hooks/FetchData";
+import Spinner from "../UI/Spinner";
+import useFetchData from "../../hooks/FetchData";
+import UserCard from "./UserCard";
 
 const Users = () => {
   const {
     data: users,
     isLoading,
-    error,
   } = useFetchData("https://jsonplaceholder.typicode.com/users");
 
   return (
     <div className="users">
       <h2>Users List</h2>
-      {error && <span>Data alınırken bir hata oluştu!</span>}
       {isLoading && <Spinner />}
-      <ul>
+      <div className="row">
         {users.map((user) => (
-          <li key={user.id}>
-            <strong>Name: </strong> <span>{user.name}</span>
-          </li>
+          <UserCard user={user} key={user.id} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
