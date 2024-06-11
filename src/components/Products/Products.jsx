@@ -6,15 +6,19 @@ import "./Products.css";
 import Spinner from "../UI/Spinner";
 import useFetchData from "../../hooks/FetchData";
 
-function Products() {
+function Products({cartItems, setCartItems}) {
   const {
     data: products,
     setData: setProducts,
     isLoading,
     error,
   } = useFetchData("https://fakestoreapi.com/products/");
-  
+
   const [isShowModal, setIsShowModal] = useState(false);
+  console.log("products re-rendered");
+
+
+  console.log(cartItems.length);
 
   function handleDeleteItem(productId) {
     const filteredProducts = products.filter((item) => item.id !== productId);
@@ -52,6 +56,8 @@ function Products() {
               key={item.id}
               {...item}
               handleDeleteItem={handleDeleteItem}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
             />
           );
         })}
