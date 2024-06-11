@@ -5,7 +5,7 @@ import { CartContext } from "../../context/CartContext";
 import "./ProductItem.css";
 function ProductItem(props) {
   const { handleDeleteItem, cart, ...product } = props;
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, deleteFromCart } = useContext(CartContext);
 
   return (
     <div className="product-item">
@@ -13,10 +13,10 @@ function ProductItem(props) {
         <img src={product.image} alt={product.title} />
       </div>
       <div className="product-info">
-        <strong>
-          {product.title}{" "}
-        </strong>
-        <span>{product.price}₺  {cart && `x ${product.quantity}`}</span>
+        <strong>{product.title} </strong>
+        <span>
+          {product.price}₺ {cart && `x ${product.quantity}`}
+        </span>
         <span>{product.description}</span>
         {!cart && (
           <Button
@@ -30,7 +30,9 @@ function ProductItem(props) {
         <Button
           size="sm"
           color="danger"
-          onClick={() => (cart ? {} : handleDeleteItem(product.id))}
+          onClick={() =>
+            cart ? deleteFromCart(product.id) : handleDeleteItem(product.id)
+          }
         >
           {cart ? "Delete From Cart" : "Delete Item"}
         </Button>

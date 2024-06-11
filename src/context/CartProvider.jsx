@@ -27,11 +27,19 @@ const CartProvider = (props) => {
     setCartItems((prevState) => [product, ...prevState]);
   };
 
+  const deleteFromCart = (cartItemId) => {
+    const filteredCartItems = cartItems.filter(
+      (item) => item.id !== cartItemId
+    );
+    setCartItems(filteredCartItems);
+  };
+
   return (
     <CartContext.Provider
       value={{
         fullName: "Emin Başbayan",
         addToCart,
+        deleteFromCart,
         cartItems,
       }}
     >
