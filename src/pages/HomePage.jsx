@@ -1,9 +1,6 @@
-import Header from "../components/Layout/Header";
-
 const HomePage = () => {
   return (
     <div className="home-page">
-      <Header />
       <h1>Home Page</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea illum

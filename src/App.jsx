@@ -4,9 +4,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ThemeContext } from "./context/ThemeContext";
 
+import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
-
 import UsersPage from "./pages/UsersPage";
 import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
@@ -20,27 +20,33 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomePage />,
-    },
-    {
-      path: "/products",
-      element: <ProductsPage />,
-    },
-    {
-      path: "/users",
-      element: <UsersPage />,
-    },
-    {
-      path: "/about",
-      element: <AboutPage />,
-    },
-    {
-      path: "/cart",
-      element: <CartPage />,
-    },
-    {
-      path: "*",
-      element: <Error404 />,
+      element: <MainLayout />,
+      children: [
+        {
+          path: "/",
+          element: <HomePage />,
+        },
+        {
+          path: "/products",
+          element: <ProductsPage />,
+        },
+        {
+          path: "/users",
+          element: <UsersPage />,
+        },
+        {
+          path: "/about",
+          element: <AboutPage />,
+        },
+        {
+          path: "/cart",
+          element: <CartPage />,
+        },
+        {
+          path: "*",
+          element: <Error404 />,
+        },
+      ],
     },
   ]);
 
