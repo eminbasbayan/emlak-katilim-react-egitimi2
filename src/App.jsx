@@ -4,15 +4,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { ThemeContext } from "./context/ThemeContext";
 
-import Header from "./components/Layout/Header";
-
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 
-import "react-toastify/dist/ReactToastify.css";
 import UsersPage from "./pages/UsersPage";
 import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
+
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { themeMode } = useContext(ThemeContext);
@@ -43,7 +42,7 @@ function App() {
   return (
     <div className={`app ${themeMode}`}>
       <div className=" container">
-        <Header />
+        
         <RouterProvider router={router} />
         <ToastContainer />
       </div>
