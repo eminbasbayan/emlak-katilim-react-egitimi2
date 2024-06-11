@@ -1,19 +1,15 @@
 import { ToastContainer } from "react-toastify";
 import Products from "./components/Products/Products";
-import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Layout/Header";
-import { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
-
-  console.log("app re-rendered");
-
   return (
     <div className="app container">
-      <Header cartItems={cartItems} />
+      <Header />
       <h1>App</h1>
-      <Products setCartItems={setCartItems} cartItems={cartItems} />
+      <Products />
       <ToastContainer />
     </div>
   );

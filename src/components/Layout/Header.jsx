@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
-const Header = ({ cartItems }) => {
-    console.log("header re-rendered");
-
+const Header = () => {
+  const value = useContext(CartContext);
   return (
     <header className="position-sticky top-0">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,7 +40,7 @@ const Header = ({ cartItems }) => {
                   <i className="bi bi-cart"></i>
 
                   <span className="position-absolute top-4 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cartItems.length}
+                    {value.cartItems.length}
                     <span className="visually-hidden">unread messages</span>
                   </span>
                 </a>
@@ -51,10 +51,6 @@ const Header = ({ cartItems }) => {
       </nav>
     </header>
   );
-};
-
-Header.propTypes = {
-    cartItems: PropTypes.array
 };
 
 export default Header;

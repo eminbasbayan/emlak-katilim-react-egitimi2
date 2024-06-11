@@ -1,15 +1,11 @@
 import Button from "../UI/Button";
 import PropTypes from "prop-types";
 import "./ProductItem.css";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 function ProductItem(props) {
-  // const { id, image, title, price, description, handleDeleteItem } = props;
-  const { handleDeleteItem, cartItems, setCartItems, ...product } = props;
-
-  const addToCart = () => {
-    setCartItems([product, ...cartItems]);
-  };
-
-  console.log("product-item re-rendered");
+  const { handleDeleteItem, ...product } = props;
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div className="product-item">
@@ -20,7 +16,7 @@ function ProductItem(props) {
         <strong>{product.title}</strong>
         <span>{product.price}₺</span>
         <span>{product.description}</span>
-        <Button size="sm" color="primary" onClick={addToCart}>
+        <Button size="sm" color="primary" onClick={() => addToCart(product)}>
           Add To Cart
         </Button>
         <Button
@@ -42,8 +38,6 @@ ProductItem.propTypes = {
   price: PropTypes.number,
   description: PropTypes.string,
   handleDeleteItem: PropTypes.func,
-  cartItems: PropTypes.array,
-  setCartItems: PropTypes.func,
 };
 
 export default ProductItem;
