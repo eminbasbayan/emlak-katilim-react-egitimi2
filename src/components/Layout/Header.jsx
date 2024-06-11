@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { ThemeContext } from "../../context/ThemeContext";
 
@@ -19,34 +19,39 @@ const Header = () => {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ms-auto fs-5">
               <li className="nav-item">
-                <Link className="nav-link active" to="/">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-danger" : "nav-link"
+                  }
+                  to="/"
+                >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/products">
+                <NavLink className="nav-link" to="/products">
                   Products
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/users">
+                <NavLink className="nav-link" to="/users">
                   Users
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <NavLink className="nav-link" to="/about">
                   About
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link position-relative" to="/cart">
+                <NavLink className="nav-link position-relative" to="/cart">
                   <i className="bi bi-cart"></i>
 
                   <span className="position-absolute top-4 start-100 translate-middle badge rounded-pill bg-danger">
                     {value.cartItems.length}
                     <span className="visually-hidden">unread messages</span>
                   </span>
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
                 <button
