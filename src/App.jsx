@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./pages/404Page";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import { fethWithTimeout } from "./utils/fetchWithTimeout";
+import AdminPage from "./pages/Admin/AdminPage";
+import AdminLayout from "./layouts/AdminLayout";
 
 function App() {
   const { themeMode } = useContext(ThemeContext);
@@ -58,8 +60,22 @@ function App() {
           element: <ProductDetailsPage />,
         },
         {
+          path: "/admin",
+          element: <AdminPage />,
+        },
+        {
           path: "*",
           element: <Error404 />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout />,
+      children: [
+        {
+          index: true,
+          element: <AdminPage />,
         },
       ],
     },
