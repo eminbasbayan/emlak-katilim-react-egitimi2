@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Skeleton from "../components/UI/Skeleton";
 
 const ProductDetailsPage = () => {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const { productId } = useParams();
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${productId}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data));
+      .then((data) => setProduct(data))
+      .catch((err) => console.log(err));
   }, [productId]);
+
+  if (!product) {
+    return <Skeleton />;
+  }
 
   return (
     <div className="product-details-page">
