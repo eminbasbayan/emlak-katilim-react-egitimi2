@@ -6,7 +6,7 @@ import "./Products.css";
 import Spinner from "../UI/Spinner";
 import useFetchData from "../../hooks/FetchData";
 
-function Products({cartItems, setCartItems}) {
+function Products({ cartItems, setCartItems }) {
   const {
     data: products,
     setData: setProducts,
@@ -16,7 +16,6 @@ function Products({cartItems, setCartItems}) {
 
   const [isShowModal, setIsShowModal] = useState(false);
   console.log("products re-rendered");
-
 
   console.log(cartItems.length);
 
