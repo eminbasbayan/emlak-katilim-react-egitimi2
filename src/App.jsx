@@ -12,6 +12,7 @@ import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
 
 import "react-toastify/dist/ReactToastify.css";
+import Error404 from "./pages/404Page";
 
 function App() {
   const { themeMode } = useContext(ThemeContext);
@@ -37,12 +38,15 @@ function App() {
       path: "/cart",
       element: <CartPage />,
     },
+    {
+      path: "*",
+      element: <Error404 />,
+    },
   ]);
 
   return (
     <div className={`app ${themeMode}`}>
       <div className=" container">
-        
         <RouterProvider router={router} />
         <ToastContainer />
       </div>
