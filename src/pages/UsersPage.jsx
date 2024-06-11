@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import Users from "../components/Users/Users";
 
 const UsersPage = () => {
-  const { data } = useLoaderData();
+  const data = useLoaderData();
 
   return (
     <div className="users-page">

@@ -7,7 +7,7 @@ const Users = ({ users }) => {
     <div className="users">
       <h2>Users List</h2>
       <div className="row">
-        {users.map((user) => (
+        {users?.map((user) => (
           <UserCard user={user} key={user.id} />
         ))}
       </div>

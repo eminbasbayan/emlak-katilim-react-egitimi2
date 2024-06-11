@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -15,6 +14,7 @@ import CartPage from "./pages/CartPage";
 import "react-toastify/dist/ReactToastify.css";
 import Error404 from "./pages/404Page";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import { fethWithTimeout } from "./utils/fetchWithTimeout";
 
 function App() {
   const { themeMode } = useContext(ThemeContext);
@@ -36,9 +36,12 @@ function App() {
           path: "/users",
           element: <UsersPage />,
           loader: async () => {
-            const data = await axios(
-              "https://jsonplaceholder.typicode.com/users"
+            const res = await fethWithTimeout(
+              "https://jsonplaceholder.typicode.com/users",
+              {},
+              5000
             );
+            const data = await res.json();
             return data;
           },
         },
