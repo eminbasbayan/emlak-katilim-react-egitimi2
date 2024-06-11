@@ -16,7 +16,11 @@ function ProductItem(props) {
         <strong>{product.title}</strong>
         <span>{product.price}₺</span>
         <span>{product.description}</span>
-        <Button size="sm" color="primary" onClick={() => addToCart(product)}>
+        <Button
+          size="sm"
+          color="primary"
+          onClick={() => addToCart({ ...product, quantity: 1 })}
+        >
           Add To Cart
         </Button>
         <Button
