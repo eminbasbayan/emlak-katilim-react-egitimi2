@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -34,6 +35,12 @@ function App() {
         {
           path: "/users",
           element: <UsersPage />,
+          loader: async () => {
+            const data = await axios(
+              "https://jsonplaceholder.typicode.com/users"
+            );
+            return data;
+          },
         },
         {
           path: "/about",

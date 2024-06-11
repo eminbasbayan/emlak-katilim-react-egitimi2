@@ -1,17 +1,11 @@
-import Spinner from "../UI/Spinner";
-import useFetchData from "../../hooks/FetchData";
+import PropTypes from "prop-types";
 import UserCard from "./UserCard";
 
-const Users = () => {
-  const {
-    data: users,
-    isLoading,
-  } = useFetchData("https://jsonplaceholder.typicode.com/users");
-
+const Users = ({ users }) => {
+  
   return (
     <div className="users">
       <h2>Users List</h2>
-      {isLoading && <Spinner />}
       <div className="row">
         {users.map((user) => (
           <UserCard user={user} key={user.id} />
@@ -19,6 +13,10 @@ const Users = () => {
       </div>
     </div>
   );
+};
+
+Users.propTypes = {
+  users: PropTypes.array,
 };
 
 export default Users;
