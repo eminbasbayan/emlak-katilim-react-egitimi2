@@ -1,37 +1,17 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import PropTypes from "prop-types";
 import { CartContext } from "./CartContext";
+import { cartReducer, initialState } from "./reducers/cartReducer";
 
 const CartProvider = (props) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = (product) => {
-    // gelen ürün sepette var mı yok mu?
-    const findCartItem = cartItems.find((item) => item.id === product.id);
-    // eğer varsa ürünün quantity değerini 1 arttır
-    if (findCartItem) {
-      const newCartItems = cartItems.map((item) => {
-        if (item.id === findCartItem.id) {
-          return {
-            ...item,
-            quantity: item.quantity + 1,
-          };
-        }
-        return item;
-      });
-
-      setCartItems(newCartItems);
-      return;
-    }
-    // yoksa yeni ürün olarak ekle
-    setCartItems((prevState) => [product, ...prevState]);
+    dispatch({ type: "ADD_TO_CART", product });
   };
 
   const deleteFromCart = (cartItemId) => {
-    const filteredCartItems = cartItems.filter(
-      (item) => item.id !== cartItemId
-    );
-    setCartItems(filteredCartItems);
+    dispatch({ type: "DELETE_FROM_CART", cartItemId });
   };
 
   return (
@@ -40,7 +20,8 @@ const CartProvider = (props) => {
         fullName: "Emin Başbayan",
         addToCart,
         deleteFromCart,
-        cartItems,
+        cartItems: state.cartItems,
+        total: state.total,
       }}
     >
       {props.children}

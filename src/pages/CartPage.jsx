@@ -3,11 +3,7 @@ import { CartContext } from "../context/CartContext";
 import CartItem from "../components/Products/ProductItem";
 
 const CartPage = () => {
-  const { cartItems } = useContext(CartContext);
-
-  const totalCartItems = cartItems.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  const { cartItems, total: totalCartItems } = useContext(CartContext);
 
   return (
     <div className="cart-page">
