@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { themeModeHandler } from "../../redux/slices/themeSlice";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { themeMode } = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
   return (
     <header className="position-sticky top-0">
@@ -52,16 +55,16 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                {/*  <button
+                <button
                   className="nav-link position-relative"
-                  onClick={themeModeHandler}
+                  onClick={() => dispatch(themeModeHandler())}
                 >
                   {themeMode === "light" ? (
                     <i className="bi bi-toggle-off"></i>
                   ) : (
                     <i className="bi bi-toggle-on"></i>
                   )}
-                </button> */}
+                </button>
               </li>
             </ul>
           </div>
