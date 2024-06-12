@@ -1,7 +1,11 @@
+import Counter from "../Counter";
+
 const HomePage = () => {
+
   return (
     <div className="home-page">
       <h1>Home Page</h1>
+      <Counter />
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea illum
         minima quos inventore possimus vitae magni nisi qui sed? Tenetur iusto

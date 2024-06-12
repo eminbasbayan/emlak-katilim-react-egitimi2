@@ -1,11 +1,8 @@
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { CartContext } from "../../context/CartContext";
-import { ThemeContext } from "../../context/ThemeContext";
 
 const Header = () => {
-  const value = useContext(CartContext);
-  const { themeModeHandler, themeMode } = useContext(ThemeContext);
+
+  return;
   return (
     <header className="position-sticky top-0">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

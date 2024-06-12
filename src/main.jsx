@@ -1,13 +1,11 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import CartProvider from "./context/CartProvider.jsx";
+import { Provider as ReduxProvider } from "react-redux";
+import store from "./redux/store.js";
 import "./index.css";
-import ThemeProvider from "./context/ThemeProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <CartProvider>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </CartProvider>
+  <ReduxProvider store={store}>
+    <App />
+  </ReduxProvider>
 );

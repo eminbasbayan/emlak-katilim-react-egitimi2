@@ -1,23 +1,15 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { arttir, azalt } from "./redux/slices/counterSlice";
 
 function Counter() {
-  const [count, setCount] = useState(0);
-
-  function arttir() {
-    setCount(count + 1);
-  }
-
-  function azalt() {
-    if (count === 0) return;
-
-    setCount(count - 1);
-  }
+  const { count } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
 
   return (
     <div className="counter">
-      <button onClick={arttir}>+</button>
+      <button onClick={() => dispatch(arttir({ amount: 255 }))}>+</button>
       <span>{count}</span>
-      <button onClick={azalt}>-</button>
+      <button onClick={() => dispatch(azalt())}>-</button>
     </div>
   );
 }

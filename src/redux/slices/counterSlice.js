@@ -7,7 +7,8 @@ const counterSlice = createSlice({
   },
   reducers: {
     arttir: (state, action) => {
-      state.count += 1;
+      console.log(action);
+      state.count += action.payload.amount;
     },
     azalt: (state, action) => {
       state.count -= 1;
