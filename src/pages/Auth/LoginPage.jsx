@@ -30,7 +30,7 @@ const LoginPage = () => {
   function onSubmit(data) {
     toast.success("Giriş işlemi başarılı!", { autoClose: 1000 });
     setTimeout(() => navigate("/"), 1000);
-    dispatch(loginUser({ user: data }));
+    dispatch(loginUser({ user: { ...data, role: "admin" } }));
   }
 
   return (

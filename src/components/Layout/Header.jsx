@@ -29,6 +29,16 @@ const Header = () => {
                   className={({ isActive }) =>
                     isActive ? "nav-link active text-danger" : "nav-link"
                   }
+                  to="/admin"
+                >
+                  Admin
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-danger" : "nav-link"
+                  }
                   to="/"
                 >
                   Home
