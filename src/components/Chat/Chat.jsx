@@ -45,6 +45,7 @@ const Chat = () => {
                 type="text"
                 placeholder="bir mesaj yazınız"
                 onChange={(e) => setMessage(e.target.value)}
+                value={message}
               />
               <button>Gönder</button>
             </div>
