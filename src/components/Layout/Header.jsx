@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
+  const { cartItems } = useSelector((state) => state.cart);
 
-  return;
   return (
     <header className="position-sticky top-0">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,13 +46,13 @@ const Header = () => {
                   <i className="bi bi-cart"></i>
 
                   <span className="position-absolute top-4 start-100 translate-middle badge rounded-pill bg-danger">
-                    {value.cartItems.length}
+                    {cartItems.length}
                     <span className="visually-hidden">unread messages</span>
                   </span>
                 </NavLink>
               </li>
               <li className="nav-item">
-                <button
+                {/*  <button
                   className="nav-link position-relative"
                   onClick={themeModeHandler}
                 >
@@ -60,7 +61,7 @@ const Header = () => {
                   ) : (
                     <i className="bi bi-toggle-on"></i>
                   )}
-                </button>
+                </button> */}
               </li>
             </ul>
           </div>

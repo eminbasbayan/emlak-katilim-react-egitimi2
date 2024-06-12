@@ -10,7 +10,7 @@ const counterSlice = createSlice({
       console.log(action);
       state.count += action.payload.amount;
     },
-    azalt: (state, action) => {
+    azalt: (state) => {
       state.count -= 1;
     },
   },

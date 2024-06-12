@@ -1,9 +1,10 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { useSelector } from "react-redux";
 import CartItem from "../components/Products/ProductItem";
 
 const CartPage = () => {
-  const { cartItems, total: totalCartItems } = useContext(CartContext);
+  const { cartItems, total: totalCartItems } = useSelector(
+    (state) => state.cart
+  );
 
   return (
     <div className="cart-page">
