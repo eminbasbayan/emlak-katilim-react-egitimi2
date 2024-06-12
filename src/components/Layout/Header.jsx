@@ -1,11 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { themeModeHandler } from "../../redux/slices/themeSlice";
+import { logoutUser } from "../../redux/slices/authSlice";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { themeMode } = useSelector((state) => state.theme);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  console.log(user);
 
   return (
     <header className="position-sticky top-0">
@@ -65,6 +70,24 @@ const Header = () => {
                     <i className="bi bi-toggle-on"></i>
                   )}
                 </button>
+              </li>
+              <li className="nav-item">
+                {user && (
+                  <button
+                    className="nav-link position-relative"
+                    onClick={() => dispatch(logoutUser())}
+                  >
+                    <i className="bi bi-box-arrow-in-right"></i>
+                  </button>
+                )}
+                {!user && (
+                  <button
+                    className="nav-link position-relative"
+                    onClick={() => navigate("/auth/login")}
+                  >
+                    Login
+                  </button>
+                )}
               </li>
             </ul>
           </div>

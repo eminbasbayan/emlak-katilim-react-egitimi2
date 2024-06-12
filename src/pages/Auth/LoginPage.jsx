@@ -1,6 +1,10 @@
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/slices/authSlice";
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -12,6 +16,8 @@ const schema = Yup.object().shape({
 });
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -22,7 +28,9 @@ const LoginPage = () => {
   });
 
   function onSubmit(data) {
-    console.log(data);
+    toast.success("Giriş işlemi başarılı!", { autoClose: 1000 });
+    setTimeout(() => navigate("/"), 1000);
+    dispatch(loginUser({ user: data }));
   }
 
   return (
