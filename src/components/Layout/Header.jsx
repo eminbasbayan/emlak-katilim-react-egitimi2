@@ -60,6 +60,11 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink className="nav-link" to="/chat">
+                  Chat
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink className="nav-link position-relative" to="/cart">
                   <i className="bi bi-cart"></i>
 
