@@ -1,6 +1,9 @@
+import { Suspense, lazy } from "react";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AdminLayout from "../layouts/AdminLayout";
-import AdminPage from "../pages/Admin/AdminPage";
+
+const AdminPage = lazy(() => import("../pages/Admin/AdminPage"));
+const AdminSettingsPage = lazy(() => import("../pages/Admin/SettingsPage"));
 
 export const adminRoutes = [
   {
@@ -12,8 +15,20 @@ export const adminRoutes = [
     ),
     children: [
       {
-        index: true,
-        element: <AdminPage />,
+        path: "",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AdminPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "settings",
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <AdminSettingsPage />
+          </Suspense>
+        ),
       },
     ],
   },
