@@ -1,4 +1,4 @@
 import { adminRoutes } from "./AdminRoutes";
 import { mainRoutes } from "./MainRoutes";
-
-export { mainRoutes, adminRoutes };
+import { authRoutes } from "./AuthRoutes";
+export { mainRoutes, adminRoutes, authRoutes };
