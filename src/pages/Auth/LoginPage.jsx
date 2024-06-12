@@ -1,22 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email("Geçerli bir email girin!")
+    .required("Email zorunlu!"),
+  password: Yup.string()
+    .required("Şifre zorunlu!")
+    .min(6, "Şifre en az 6 karakter olmalı!"),
+});
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    trigger,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log({ email, password });
-    toast.success("Giriş başarılı!", {
-      autoClose: 1500,
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+  function onSubmit(data) {
+    console.log(data);
   }
+
   return (
     <div className="login-page">
       <div className="container d-flex align-items-center justify-content-center min-vh-100">
@@ -25,7 +33,7 @@ const LoginPage = () => {
           style={{ maxWidth: "400px", width: "100%" }}
         >
           <h2 className="text-center mb-4">Giriş Yap</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">
                 Email adresi
@@ -35,10 +43,15 @@ const LoginPage = () => {
                 className="form-control"
                 name="email"
                 placeholder="Emailinizi girin"
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
+                onBlur={() => trigger("email")}
               />
-              <span className="text-danger">Email input zorunlu!</span>
+              {errors.email && (
+                <span className="text-danger">{errors.email.message}</span>
+              )}
             </div>
+            {/* errors will return when field validation fails  */}
+            {errors.exampleRequired && <span>This field is required</span>}
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
                 Şifre
@@ -48,9 +61,12 @@ const LoginPage = () => {
                 className="form-control"
                 name="password"
                 placeholder="Şifrenizi girin"
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
+                onBlur={() => trigger("password")}
               />
-              <span className="text-danger">Password input zorunlu!</span>
+              {errors.password && (
+                <span className="text-danger">{errors.password.message}</span>
+              )}
             </div>
             <div className="d-grid">
               <button type="submit" className="btn btn-primary btn-block">
