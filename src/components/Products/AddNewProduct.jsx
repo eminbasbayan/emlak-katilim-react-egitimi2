@@ -4,6 +4,8 @@ import Button from "../UI/Button";
 import productInputs from "./productInputs";
 import ProductInput from "./ProductInput";
 import "./AddNewProduct.css";
+import { useDispatch } from "react-redux";
+import { addNewProduct } from "../../redux/slices/productSlice";
 
 const initialState = {
   title: "",
@@ -13,8 +15,9 @@ const initialState = {
 };
 
 function AddNewProduct(props) {
-  const { setProducts, setIsShowModal } = props;
+  const { setIsShowModal } = props;
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
 
   function handleChange({ target: { name, value } }) {
     setFormData({
@@ -41,7 +44,7 @@ function AddNewProduct(props) {
       price: Number(formData.price),
     };
 
-    setProducts((products) => [newProduct, ...products]);
+    dispatch(addNewProduct(newProduct));
 
     // clear form inputs
     setFormData(initialState);
@@ -65,7 +68,6 @@ function AddNewProduct(props) {
 }
 
 AddNewProduct.propTypes = {
-  setProducts: PropTypes.func,
   setIsShowModal: PropTypes.func,
 };
 

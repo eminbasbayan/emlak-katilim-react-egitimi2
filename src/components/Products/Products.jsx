@@ -1,40 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import ProductItem from "./ProductItem";
 import AddNewProduct from "./AddNewProduct";
 import Modal from "../UI/Modal";
-import "./Products.css";
 import Spinner from "../UI/Spinner";
-import useFetchData from "../../hooks/FetchData";
+import {
+  fetchProducts,
+  handleDeleteProduct,
+} from "../../redux/slices/productSlice";
+
+import "./Products.css";
 
 function Products() {
-  const {
-    data: products,
-    setData: setProducts,
-    isLoading,
-    error,
-  } = useFetchData("https://fakestoreapi.com/products/");
-
+  const { products, status, error } = useSelector((state) => state.product);
   const [isShowModal, setIsShowModal] = useState(false);
+  const dispatch = useDispatch();
 
   function handleDeleteItem(productId) {
     const filteredProducts = products.filter((item) => item.id !== productId);
-    setProducts(filteredProducts);
+    dispatch(handleDeleteProduct(filteredProducts));
   }
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [status, dispatch]);
 
   return (
     <div className="products-wrapper">
-      <AddNewProduct
-        setProducts={setProducts}
-        setIsShowModal={setIsShowModal}
-      />
+      <AddNewProduct setIsShowModal={setIsShowModal} />
 
-      {isLoading && (
+      {status === "loading" && (
         <>
           <Spinner />
           <br />
           <br />
         </>
       )}
+
+      {error && <p>{error}</p>}
 
       {isShowModal && (
         <Modal
